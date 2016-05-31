@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by EPSI on 22.05.2016.
- */
 public class AdapterMain extends RecyclerView.Adapter<AdapterMain.CellHolder>{
 
     private final Context monContext;
@@ -53,7 +50,6 @@ public class AdapterMain extends RecyclerView.Adapter<AdapterMain.CellHolder>{
             monCellData = t;
         }
 
-        @Override
         public void onClick(View view) {
             Intent detailIntent = new Intent(monContext,RoomActivity.class);
             detailIntent.putExtra(monCellData, "cellData");
