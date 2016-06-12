@@ -1,4 +1,4 @@
-package com.homenmove.modeles;
+package com.example.hm.homenmove.modeles;
 
 import com.google.gson.annotations.SerializedName;
 

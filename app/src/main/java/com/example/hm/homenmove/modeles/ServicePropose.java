@@ -1,12 +1,9 @@
-package com.homenmove.modeles;
+package com.example.hm.homenmove.modeles;
 
 /**
  * Created by Khaderik on 31/05/2016.
  */
 import com.google.gson.annotations.SerializedName;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ServicePropose {
 
