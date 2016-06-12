@@ -1,51 +1,27 @@
 package com.example.hm.homenmove;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.homenmove.api.wshnm.HomeNMoveApi;
-import com.homenmove.api.wshnm.services.UtilisateursService;
-import com.example.hm.homenmove.modeles.Utilisateur;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView _textView;
-    private Call<Utilisateur> callUtilisateur;
-    private Utilisateur monUser;
-    private UtilisateursService _monUserSvc;
-
+    private RecyclerView monRecyclerView;
+    private RecyclerView.Adapter monAdapter;
+    private RecyclerView.LayoutManager monLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        monRecyclerView = (RecyclerView) findViewById(R.id.recycleViewChambre);
 
-        _monUserSvc = HomeNMoveApi.getUtilisateursSvc();
-        callUtilisateur = _monUserSvc.getUtilisateur(1);
+        monLayoutManager = new LinearLayoutManager(this);
+        monRecyclerView.setLayoutManager(monLayoutManager);
 
-        callUtilisateur.enqueue(new Callback<Utilisateur>() {
-
-            @Override
-            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
-                // handle success
-                if (response.isSuccessful() &&  response.body().getClass() == Utilisateur.class) {
-                    monUser = response.body();
-                    _textView.setText("OK");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Utilisateur> call, Throwable t) {
-                // handle failure
-                Toast.makeText(getApplicationContext(), String.format("L'appel à l'API a échoué: %s ", t.getMessage()), Toast.LENGTH_SHORT).show();
-            }
-
-        });
+        String[] monDataSet = {"1","2","3","4"};
+        monAdapter = new AdapterMain(getBaseContext(), monDataSet);
+        monRecyclerView.setAdapter(monAdapter);
     }
 }
