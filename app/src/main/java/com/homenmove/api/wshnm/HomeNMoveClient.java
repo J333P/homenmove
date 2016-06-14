@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Khaderik on 31/05/2016.
  */
-public class HomeNMoveApi {
+public class HomeNMoveClient {
 
     private static final String BASE_URL = "http://homenmove.api.montpellier.epsi.fr/api/";
     //private static final String BASE_URL = "http://localhost:5110/api/";

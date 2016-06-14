@@ -28,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         monRecyclerView = (RecyclerView) findViewById(R.id.recycleViewChambre);
 
+
+        /**
+         *
+         * TODO: remettre en place le recyclerView en se basant sur le corrigé de Mr Britto
+         * TODO: réaliser l'Async callback des chambres dans l'adapter du recyclerview.
+         *
+         */
         monCallListeDesChambres = HomeNMoveClient.getChambresSvc().getLesChambres();
 
         monCallListeDesChambres.enqueue(new Callback<List<Chambre>>() {
