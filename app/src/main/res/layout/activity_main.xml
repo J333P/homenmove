@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.hm.homenmove.MainActivity">
+    tools:context="com.example.hm.homenmove.MainActivity"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -27,29 +29,33 @@
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:scaleType="center"
             android:id="@+id/rechercher"
-            android:src="@drawable/search"
+            android:src="@drawable/ic_search_black_48dp"
             android:layout_alignParentRight="true"
+            android:background="#00000000"
         />
 
         <ImageButton
-            android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:scaleType="center"
             android:id="@+id/login"
-            android:src="@drawable/login"
+            android:src="@drawable/ic_account_circle_black_48dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
+            android:background="#00000000"
         />
-
     </LinearLayout>
 
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Filtrer les chambres"
-        android:id="@+id/filtreChambre"
-        android:layout_marginTop="10dp"
-    />
+
+
+   <!--<android.support.v7.widget.AppCompatSpinner-->
+       <!--android:layout_width="120dp"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:layout_gravity="end"-->
+
+       <!--/>-->
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
