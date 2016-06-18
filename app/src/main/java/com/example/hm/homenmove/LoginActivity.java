@@ -346,5 +346,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
+    public void clicRegister() {
+        //TODO vérifier ou créer compte et retourner l'identifiant utilisateur au main activity (variable idUtilisateur)
+    }
 }
 

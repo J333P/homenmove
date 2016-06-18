@@ -1,5 +1,6 @@
 package com.example.hm.homenmove;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +22,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.support.v4.app.ActivityCompat.startActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView RcvChambres;
-
     private List<Chambre> _lesChambres;
+    private int idUtilisateur = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +68,16 @@ public class MainActivity extends AppCompatActivity {
                 //Snackbar.make(mainLayout, t.getMessage(), Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void clicOuvrirAccount(View view) {
+        if (idUtilisateur == 0) {
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
+        else {
+            Intent accountIntent = new Intent(this, AccountActivity.class);
+            startActivity(accountIntent);
+        }
     }
 }
