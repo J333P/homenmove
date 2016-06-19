@@ -3,6 +3,7 @@ package com.example.hm.homenmove;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private int idUser; //TODO charger cette valeur lors du log
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        TextView txtMail = (TextView)findViewById(R.id.email);
+        txtMail.setVisibility(View.INVISIBLE);
+
+        TextView txtNom = (TextView)findViewById(R.id.txtNom);
+        txtNom.setVisibility(View.INVISIBLE);
+
+        TextView txtPrenom = (TextView)findViewById(R.id.txtPrenom);
+        txtPrenom.setVisibility(View.INVISIBLE);
+
+        TextView txtAdresse = (TextView)findViewById(R.id.txtAdresse);
+        txtAdresse.setVisibility(View.INVISIBLE);
+
+        TextView txtDateNaissance = (TextView)findViewById(R.id.txtDateNaissance);
+        txtDateNaissance.setVisibility(View.INVISIBLE);
+
+        Button btnCreateAccount = (Button)findViewById(R.id.btnCreateAccount);
+        btnCreateAccount.setVisibility(View.INVISIBLE);
+
     }
 
     private void populateAutoComplete() {
@@ -136,6 +157,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }
     }
+
 
 
     /**
@@ -347,8 +369,45 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    public void clicRegister() {
-        //TODO vérifier ou créer compte et retourner l'identifiant utilisateur au main activity (variable idUtilisateur)
+    public void clicLogin(View view) {
+        Intent accountIntent = new Intent(this, AccountActivity.class);
+        accountIntent.putExtra("idUtilisateur", idUser);
+        startActivity(accountIntent);
     }
+
+    public void clicAfficherChamps(View view) {
+
+        Button signInButton = (Button)findViewById(R.id.email_sign_in_button);
+        signInButton.setVisibility(View.INVISIBLE);
+
+        Button AfficheChampsButton = (Button)findViewById(R.id.afficherChamps);
+        AfficheChampsButton.setVisibility(View.INVISIBLE);
+
+        TextView txtMail = (TextView)findViewById(R.id.email);
+        txtMail.setVisibility(View.VISIBLE);
+
+        TextView txtNom = (TextView)findViewById(R.id.txtNom);
+        txtNom.setVisibility(View.VISIBLE);
+
+        TextView txtPrenom = (TextView)findViewById(R.id.txtPrenom);
+        txtPrenom.setVisibility(View.VISIBLE);
+
+        TextView txtAdresse = (TextView)findViewById(R.id.txtAdresse);
+        txtAdresse.setVisibility(View.VISIBLE);
+
+        TextView txtDateNaissance = (TextView)findViewById(R.id.txtDateNaissance);
+        txtDateNaissance.setVisibility(View.VISIBLE);
+
+        TextView btnCreateAccount = (TextView)findViewById(R.id.btnCreateAccount);
+        btnCreateAccount.setVisibility(View.VISIBLE);
+
+    }
+
+    public void clicCreateAccount() {
+        Intent accountIntent = new Intent(this, AccountActivity.class);
+        accountIntent.putExtra("idUtilisateur", idUser);
+        startActivity(accountIntent);
+    }
+
 }
 
