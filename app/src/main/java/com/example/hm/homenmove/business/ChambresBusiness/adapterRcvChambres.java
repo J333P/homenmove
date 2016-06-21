@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.hm.homenmove.R;
 import com.example.hm.homenmove.modeles.Chambre;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class adapterRcvChambres extends RecyclerView.Adapter<adapterRcvChambres.
     @Override
     public void onBindViewHolder(maViewHolder holder, int position) {
         Chambre uneChambre = _lesChambres.get(position);
+
         holder.setData(uneChambre);
     }
 
@@ -42,6 +44,15 @@ public class adapterRcvChambres extends RecyclerView.Adapter<adapterRcvChambres.
         return _lesChambres.size();
     }
 
+    public void clear(){
+        _lesChambres.clear();
+        notifyDataSetChanged();
+    }
+
+
+
+
+    //region classe ViewHolder
     public class maViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView _libelleChambre;
         private final TextView _villeChambre;
@@ -61,9 +72,13 @@ public class adapterRcvChambres extends RecyclerView.Adapter<adapterRcvChambres.
         public void setData(Chambre uneChambre) {
             _libelleChambre.setText(uneChambre.getLibelleChambre());
             _villeChambre.setText(uneChambre.getAdresse().getVille());
-            _image.setImageResource(R.drawable.ph);
 
-            // TODO: 16/06/2016 CH penser à gérer les photos des chambres
+            Picasso.with(_image.getContext())
+                    .load("http://homenmove.api.montpellier.epsi.fr/Content/Images/"+uneChambre.getPhoto())
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .into(_image);
+
         }
 
         @Override
@@ -73,4 +88,5 @@ public class adapterRcvChambres extends RecyclerView.Adapter<adapterRcvChambres.
 //            _context.startActivity(detailIntent);
         }
     }
+    //endregion
 }
