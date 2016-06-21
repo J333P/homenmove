@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.hm.homenmove.business.ChambresBusiness.adapterRcvChambres;
 import com.example.hm.homenmove.modeles.Chambre;
+import com.example.hm.homenmove.modeles.Utilisateur;
 import com.homenmove.api.wshnm.HomeNMoveClient;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private adapterRcvChambres chambresAdapter;
     private SwipeRefreshLayout maSwipeContainer;
     private List<Chambre> _lesChambres;
-    private String pseudoUser = "Zya";
+    private int idUser = 4; //TODO charger la valeur apres login
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clicOuvrirAccount(View view) {
-        if (pseudoUser.equals("")) {
+        if (idUser == 0) {
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         } else {
             Intent accountIntent = new Intent(this, AccountActivity.class);
-            accountIntent.putExtra("pPseudoUser", pseudoUser);
+            accountIntent.putExtra("pIdUser", idUser);
             startActivity(accountIntent);
         }
     }
