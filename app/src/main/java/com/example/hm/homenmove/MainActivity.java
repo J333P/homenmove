@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private adapterRcvChambres chambresAdapter;
     private SwipeRefreshLayout maSwipeContainer;
     private List<Chambre> _lesChambres;
-    private int idUtilisateur = 0;
+    private String pseudoUser = "Zya";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clicOuvrirAccount(View view) {
-        if (idUtilisateur == 0) {
+        if (pseudoUser.equals("")) {
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         } else {
             Intent accountIntent = new Intent(this, AccountActivity.class);
+            accountIntent.putExtra("pPseudoUser", pseudoUser);
             startActivity(accountIntent);
         }
     }
