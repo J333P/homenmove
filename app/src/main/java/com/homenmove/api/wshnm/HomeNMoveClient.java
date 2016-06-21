@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeNMoveClient {
 
     private static final String BASE_URL = "http://homenmove.api.montpellier.epsi.fr/api/";
-    //private static final String BASE_URL = "http://localhost:5110/api/";
+//    private static final String BASE_URL = "http://192.168.1.13:5110/api/";
 
     private static UtilisateursService UtilisateursSvc;
     private static NuitsServices NuitsSvc;

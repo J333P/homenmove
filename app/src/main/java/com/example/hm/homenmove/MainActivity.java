@@ -3,12 +3,15 @@ package com.example.hm.homenmove;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hm.homenmove.business.ChambresBusiness.adapterRcvChambres;
@@ -27,6 +30,8 @@ import static android.support.v4.app.ActivityCompat.startActivity;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView RcvChambres;
+    private adapterRcvChambres chambresAdapter;
+    private SwipeRefreshLayout maSwipeContainer;
     private List<Chambre> _lesChambres;
     private String pseudoUser = "Zya";
 
@@ -35,16 +40,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        maSwipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         RcvChambres = (RecyclerView) findViewById(R.id.recycleViewChambre);
+
         RcvChambres.setLayoutManager(new LinearLayoutManager(this));
 
         ChargeLesChambres();
+
+
+        maSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                ChargeLesChambres();
+
+                maSwipeContainer.setRefreshing(false);
+            }
+        });
     }
 
+
     private void ChargeLesChambres() {
-
-        final LinearLayout mainLayout = (LinearLayout) findViewById(R.id.MainLayout);
-
         Call<List<Chambre>> callChambres = HomeNMoveClient.getChambresSvc().getLesChambres();
 
         callChambres.enqueue(new Callback<List<Chambre>>() {
@@ -53,19 +70,20 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     _lesChambres = response.body();
 
-                    RcvChambres.setAdapter(new adapterRcvChambres(_lesChambres));
+                    chambresAdapter = new adapterRcvChambres(_lesChambres);
+                    RcvChambres.setAdapter(chambresAdapter);
+                    chambresAdapter.notifyDataSetChanged();
 
                 } else {
-                    // TODO: 16/06/2016 Pensez à gérer les erreurs
-                    Snackbar.make(mainLayout, String.format("%s: %s", response.code(), response.message()), Snackbar.LENGTH_LONG).show();
+
+                    Toast.makeText(getApplicationContext(), String.format("%s: %s", response.code(), response.message()), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Chambre>> call, Throwable t) {
-                // TODO: 16/06/2016 Pensez à gérer les erreurs
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
-                //Snackbar.make(mainLayout, t.getMessage(), Snackbar.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                chambresAdapter = null;
             }
         });
     }
@@ -74,8 +92,7 @@ public class MainActivity extends AppCompatActivity {
         if (pseudoUser.equals("")) {
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
-        }
-        else {
+        } else {
             Intent accountIntent = new Intent(this, AccountActivity.class);
             accountIntent.putExtra("pPseudoUser", pseudoUser);
             startActivity(accountIntent);

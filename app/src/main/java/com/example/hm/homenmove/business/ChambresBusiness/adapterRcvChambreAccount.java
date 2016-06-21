@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.hm.homenmove.R;
 import com.example.hm.homenmove.modeles.Chambre;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -61,9 +62,12 @@ public class adapterRcvChambreAccount extends RecyclerView.Adapter<adapterRcvCha
         public void setData(Chambre uneChambre) {
             _libelleChambre.setText(uneChambre.getLibelleChambre());
             _villeChambre.setText(uneChambre.getAdresse().getVille());
-            _image.setImageResource(R.drawable.ph);
 
-            // TODO: 16/06/2016 CH penser à gérer les photos des chambres
+            Picasso.with(_image.getContext())
+                    .load("http://homenmove.api.montpellier.epsi.fr/Content/Images/"+uneChambre.getPhoto())
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .into(_image);
         }
 
         @Override
