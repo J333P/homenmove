@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/MainLayout"
     android:layout_width="match_parent"
@@ -30,9 +31,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00000000"
+            android:contentDescription="boutonRechercher"
             android:scaleType="center"
-            android:src="@drawable/ic_search_black_48dp"
-            android:contentDescription="boutonRechercher" />
+            android:src="@drawable/ic_search_black_48dp" />
 
         <ImageButton
             android:id="@+id/login"
@@ -41,24 +42,39 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
             android:background="#00000000"
+            android:contentDescription="compteUtilisateur"
             android:onClick="clicOuvrirAccount"
             android:scaleType="center"
-            android:src="@drawable/ic_account_circle_black_48dp"
-            android:contentDescription="compteUtilisateur" />
+            android:src="@drawable/ic_account_circle_black_48dp" />
     </LinearLayout>
+
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleViewChambre"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/no_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Aucune données"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:visibility="gone"/>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleViewChambre"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:scrollbars="vertical" />
+        </FrameLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

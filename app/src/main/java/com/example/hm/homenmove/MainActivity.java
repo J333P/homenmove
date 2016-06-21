@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView RcvChambres;
     private adapterRcvChambres chambresAdapter;
     private SwipeRefreshLayout maSwipeContainer;
+    private TextView textNoData;
     private List<Chambre> _lesChambres;
     private String pseudoUser = "Zya";
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         maSwipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         RcvChambres = (RecyclerView) findViewById(R.id.recycleViewChambre);
+        textNoData = (TextView) findViewById(R.id.no_data);
 
         RcvChambres.setLayoutManager(new LinearLayoutManager(this));
 
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void ChargeLesChambres() {
+
         Call<List<Chambre>> callChambres = HomeNMoveClient.getChambresSvc().getLesChambres();
 
         callChambres.enqueue(new Callback<List<Chambre>>() {
@@ -73,17 +76,20 @@ public class MainActivity extends AppCompatActivity {
                     chambresAdapter = new adapterRcvChambres(_lesChambres);
                     RcvChambres.setAdapter(chambresAdapter);
                     chambresAdapter.notifyDataSetChanged();
+                    RcvChambres.setVisibility(View.VISIBLE);
 
                 } else {
-
+                    RcvChambres.setVisibility(View.GONE);
+                    textNoData.setVisibility(View.VISIBLE);
                     Toast.makeText(getApplicationContext(), String.format("%s: %s", response.code(), response.message()), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Chambre>> call, Throwable t) {
+                RcvChambres.setVisibility(View.GONE);
+                textNoData.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                chambresAdapter = null;
             }
         });
     }
