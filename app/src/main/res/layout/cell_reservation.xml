@@ -15,20 +15,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
+        android:textStyle="bold"
         android:textSize="10sp"
-        android:id="@+id/villeChambre" />
+        android:id="@+id/nomChambre" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" réservée le "
+        android:text=" réservée du "
         android:textSize="10sp"
-        android:id="@+id/nuitReserve" />
+        android:id="@+id/lblDateDebut" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:id="@+id/dateReservation" />
+        android:id="@+id/dateDebut" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" au "
+        android:textSize="10sp"
+        android:id="@+id/lblDateFin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:id="@+id/dateFin" />
 
 </LinearLayout>

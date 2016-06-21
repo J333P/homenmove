@@ -15,7 +15,7 @@ import com.example.hm.homenmove.modeles.Chambre;
 import java.util.List;
 
 /**
- * Created by Khaderik on 15/06/2016.
+ * Created by Celine on 20/06/2016.
  */
 public class adapterRcvChambreAccount extends RecyclerView.Adapter<adapterRcvChambreAccount.maViewHolder> {
 
