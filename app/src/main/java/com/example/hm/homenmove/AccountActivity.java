@@ -40,7 +40,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        idUtilisateur = 4; // TODO Integer.parseInt(getIntent().getStringExtra("pIdUser"));
+        idUtilisateur = getIntent().getIntExtra("pIdUser", 0);
 
         RcvChambresAccount = (RecyclerView) findViewById(R.id.recycleViewChambreAccount);
         RcvChambresAccount.setLayoutManager(new LinearLayoutManager(this));
@@ -163,5 +163,10 @@ public class AccountActivity extends AppCompatActivity {
                 //Snackbar.make(mainLayout, t.getMessage(), Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void clicCreerChambre(View view) {
+            Intent creationChambreIntent = new Intent(this, CreationChambreActivity.class);
+            startActivity(creationChambreIntent);
     }
 }
