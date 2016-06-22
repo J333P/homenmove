@@ -8,6 +8,6 @@ public class CreationChambreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_creation_chambre);
+        setContentView(R.layout.activity_creationchambre);
     }
 }
