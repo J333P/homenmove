@@ -110,6 +110,7 @@
             android:layout_height="20dp"
             android:id="@+id/ajouterChambre"
             android:src="@drawable/ajouter"
+            android:onClick="clicCreerChambre"
             android:layout_marginLeft="20dp" />
 
     </LinearLayout>
