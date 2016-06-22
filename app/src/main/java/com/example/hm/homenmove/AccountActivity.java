@@ -69,9 +69,6 @@ public class AccountActivity extends AppCompatActivity {
                     _textView = (TextView) findViewById(R.id.txtNom);
                     _textView.setText(_utilisateur.getPrenom() + " " + _utilisateur.getNom());
 
-                    _textView = (TextView) findViewById(R.id.txtMail);
-                    _textView.setText(_utilisateur.getAdresseMail());
-
                     Adresse _adresse = _utilisateur.getAdresse();
                     _textView = (TextView) findViewById(R.id.txtAdresse1);
                     if (_adresse.getNumeroVoie() == null) {
@@ -167,6 +164,7 @@ public class AccountActivity extends AppCompatActivity {
 
     public void clicCreerChambre(View view) {
             Intent creationChambreIntent = new Intent(this, CreationChambreActivity.class);
+            creationChambreIntent.putExtra("pIdUser", idUtilisateur);
             startActivity(creationChambreIntent);
     }
 }
