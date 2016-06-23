@@ -5,6 +5,7 @@ import com.example.hm.homenmove.modeles.Utilisateur;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -26,7 +27,7 @@ public interface UtilisateursService {
     Call<Utilisateur> updateUtilisateur(@Query("id") int idUser, Utilisateur userModif);
 
     @POST ("utilisateurs")
-    Call<Utilisateur> AjouterUtilisateur(Utilisateur userAAjouter);
+    Call<Utilisateur> AjouterUtilisateur(@Body Utilisateur userAAjouter);
 
     @DELETE("utilisateurs")
     Call<Utilisateur> SupprimerUtilisateur(@Query("id") int idUser);

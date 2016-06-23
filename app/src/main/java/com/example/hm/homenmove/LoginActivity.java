@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hm.homenmove.modeles.Adresse;
 import com.example.hm.homenmove.modeles.Chambre;
 import com.example.hm.homenmove.modeles.Utilisateur;
 import com.homenmove.api.wshnm.HomeNMoveClient;
@@ -141,5 +142,42 @@ public class LoginActivity extends AppCompatActivity {
 
     public void clicCreerCompte(View view){
 
+        _textView = (TextView) findViewById(R.id.txtPseudo);
+        pseudo = _textView.getText().toString();
+
+        _textView = (TextView) findViewById(R.id.txtMdp);
+        motDePasse = _textView.getText().toString();
+
+        _textView = (TextView) findViewById(R.id.txtNom);
+        String _nom = _textView.getText().toString();
+
+        _textView = (TextView) findViewById(R.id.txtPrenom);
+        String _prenom = _textView.getText().toString();
+
+        _textView = (TextView) findViewById(R.id.txtDateNaissance);
+        String _dateNaissance = _textView.getText().toString();
+
+        Button signInButton = (Button)findViewById(R.id.loginButton);
+        signInButton.setVisibility(View.VISIBLE);
+
+        Adresse _nvAdresse = new Adresse(10, 2, "rue du test", null, 34380, "Montpellier", "France");
+        Utilisateur _nvUtilisateur = new Utilisateur(_nvAdresse, 10, pseudo, _nom, _prenom, motDePasse, _dateNaissance);
+        Call<Utilisateur> callUtilisateur = HomeNMoveClient.getUtilisateursSvc().AjouterUtilisateur(_nvUtilisateur);
+        callUtilisateur.enqueue(new Callback<Utilisateur>() {
+            @Override
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), String.format("%s: %s", response.code(), response.message()), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Utilisateur> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
