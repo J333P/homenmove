@@ -126,12 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         _textView = (TextView)findViewById(R.id.txtPrenom);
         _textView.setVisibility(View.VISIBLE);
 
-        _textView = (TextView)findViewById(R.id.txtAdresse);
-        _textView.setVisibility(View.VISIBLE);
-
-        _textView = (TextView)findViewById(R.id.txtDateNaissance);
-        _textView.setVisibility(View.VISIBLE);
-
         Button btnCreateAccount = (Button)findViewById(R.id.btnCreateAccount);
         btnCreateAccount.setVisibility(View.VISIBLE);
     }
