@@ -3,6 +3,7 @@ package com.example.hm.homenmove;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -82,6 +83,21 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                     }
+
+                    if(idUtilisateur != 0) {
+                        Intent accountIntent = new Intent(getApplicationContext(), AccountActivity.class);
+                        accountIntent.putExtra("pIdUser", idUtilisateur);
+                        startActivity(accountIntent);
+                    }
+                    else {
+                        if (message != "Mot de passe incorrect") {
+                            message = "Renseigner les données pour créer un compte";
+                            afficherChamps();
+                        }
+                        TextView txtView = (TextView) findViewById(R.id.txtMessage);
+                        txtView.setText(message);
+                        txtView.setVisibility(View.VISIBLE);
+                    }
                 }
                 else {
                     Toast.makeText(getApplicationContext(), String.format("%s: %s", response.code(), response.message()), Toast.LENGTH_LONG).show();
@@ -93,21 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-        if(idUtilisateur != 0) {
-            Intent accountIntent = new Intent(this, AccountActivity.class);
-            accountIntent.putExtra("pIdUser", idUtilisateur);
-            startActivity(accountIntent);
-        }
-        else {
-            if (message != "Mot de passe incorrect") {
-                message = "Renseigner les données pour créer un compte";
-                afficherChamps();
-            }
-            TextView txtView = (TextView) findViewById(R.id.txtMessage);
-            txtView.setText(message);
-            txtView.setVisibility(View.VISIBLE);
-        }
     }
 
     public void afficherChamps() {
