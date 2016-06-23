@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private adapterRcvChambres chambresAdapter;
     private SwipeRefreshLayout maSwipeContainer;
     private List<Chambre> _lesChambres;
-    private int idUser = 4; //TODO charger la valeur apres login
+    private int idUser; //TODO charger la valeur apres login
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void ChargeLesChambres() {
         Call<List<Chambre>> callChambres = HomeNMoveClient.getChambresSvc().getLesChambres();
-
         callChambres.enqueue(new Callback<List<Chambre>>() {
             @Override
             public void onResponse(Call<List<Chambre>> call, Response<List<Chambre>> response) {
